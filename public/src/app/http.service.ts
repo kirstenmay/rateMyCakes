@@ -22,4 +22,7 @@ export class HttpService {
   removeCake(id){
     return this._http.delete(`/api/cakes/${id}/delete`);
   }
+  findByName(baker){
+    return this._http.get(`/api/cakes/${baker}`);
+  }
 }

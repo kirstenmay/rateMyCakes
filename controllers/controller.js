@@ -36,5 +36,10 @@ module.exports = {
         Cake.deleteOne({ _id: req.params.id })
             .then(data => res.json({ message: "success", result: data }))
             .catch(err => res.json({ message: "We have an error", result: err }))
+    },
+    findBaker: function(req, res) {
+        Cake.find({ baker: req.params.baker })
+            .then(data => res.json({ message: "success", result: data }))
+            .catch(err => res.json({ message: "We have an error", result: err }))
     }
 }

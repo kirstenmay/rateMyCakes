@@ -18,6 +18,7 @@
                     <div class="card" id="blue">
                         <div class="card-body">
                             <h2>Add a new Cake</h2>
+                            <span *ngIf="newError">{{error}}</span>
                             <!-- <p> {{ newCake | json }} </p> -->
                             <form (submit)="makeNewCake()">
                                 <div class="form-group">
@@ -38,6 +39,20 @@
                 <div class="col-8">
                     <div class="card" id="flex">
                         <div class="card-body" id="scrollable">
+                            <div class="row">
+                                <div class="col-8 offset-1">
+                                    <form (submit)="find()">
+                                        <div class="form-group row">
+                                            <div class="col-10">
+                                                <input type="text" [(ngModel)]="baker" name="baker" class="form-control" placeholder="Search baker by name">
+                                            </div>
+                                            <div class="col-2">
+                                                <input type="submit" class="btn btn-outline-info" value="Search">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <div *ngFor="let cake of allCakes" class="row" id="border">
                                 <div class="col-5">
                                     <a (click)="showDetails(cake._id)">
@@ -47,6 +62,7 @@
                                 </div>
                                 <div class="col-7">
                                     <h2>Review {{cake.baker}}'s cake</h2>
+                                    <span *ngIf="revError">{{error}}</span>
                                     <form (submit)="addCakeReview(cake._id)">
                                         <div class="form-group">
                                             <label for="rating">Rating (stars):</label>
@@ -75,7 +91,8 @@
             </div>
             <div class="row justify-content-center">
                 <div *ngIf="display" class="col-10 offset-1" id="bottom">
-                    <app-cake [cake]="oneCake" [avg]="avgRating"></app-cake>
+                    <app-cake [cake]="oneCake" [avg]="avgRating" [rating]="rate"></app-cake>
+                    <button (click)="hide()" class="btn btn-sm btn-outline-dark">Close</button>
                 </div>
             </div>
         </div>

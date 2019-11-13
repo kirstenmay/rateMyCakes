@@ -14,6 +14,11 @@ export class AppComponent implements OnInit {
   newReview: any;
   oneCake: any;
   display: boolean;
+  error: any;
+  newError: boolean;
+  revError: boolean;
+  rate: boolean;
+  baker: any;
 
   constructor(private _httpService: HttpService) {}
   ngOnInit(){
@@ -23,6 +28,26 @@ export class AppComponent implements OnInit {
     this.newCake = {baker: "", imgUrl: ""};
     this.newReview = {rating: "", comment: ""};
     this.oneCake = {baker: "", imgUrl: ""};
+    this.display = false;
+    this.error = "";
+    this.newError = false;
+    this.revError = false;
+    this.rate = false;
+    this.baker = "";
+  }
+
+  find(){
+    console.log(this.baker)
+    let observable = this._httpService.findByName(this.baker);
+    observable.subscribe((data: any) => {
+      console.log("did we find anything", data.result)
+      if(data.message === "success"){
+        console.log("Trying to find baker by name", data.result);
+      }
+    })
+  }
+
+  hide(){
     this.display = false;
   }
 
@@ -38,8 +63,13 @@ export class AppComponent implements OnInit {
   makeNewCake(){
     let observable = this._httpService.newCake(this.newCake);
     observable.subscribe((data: any) => {
-      if (data.message === "success") {
+      if(data.message === "We have an error"){
+        this.error = "Invalid form submission. Baker and Url fields are required";
+        this.newError = true;
+      }
+      else if (data.message === "success") {
         console.log("We made a new cake!", data.result);
+        this.newError = false;
       }
       this.newCake = {baker: "", imgUrl: ""};
       this.getAllCakesFromService();
@@ -48,8 +78,14 @@ export class AppComponent implements OnInit {
   addCakeReview(id){
     let observable = this._httpService.addReview(id, this.newReview);
     observable.subscribe((data: any) => {
-      if(data.message === "success"){
+      if(data.message === "We have an error"){
+        this.newError = false;
+        this.error = "Invalid review submission. Rating and comment are required"
+        this.revError = true;
+      }
+      else if(data.message === "success"){
         console.log("A new review!", data.result)
+        this.revError = false;
       }
       this.newReview = {rating: "", comment: ""}
     })
@@ -58,9 +94,17 @@ export class AppComponent implements OnInit {
     let observable = this._httpService.getOneCake(id);
     observable.subscribe((data: any) => {
       if(data.message === "success"){
+        this.newError = false;
+        this.revError = false;
         console.log("Got one cake", data.result)
         this.oneCake = data.result;
         this.getAvgRating(this.oneCake.reviews);
+        if(this.oneCake.reviews.length > 0){
+          this.rate = true;
+        }
+        else{
+          this.rate = false;
+        }
       }
     })
   }

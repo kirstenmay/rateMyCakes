@@ -8,9 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CakeComponent implements OnInit {
   @Input() cake: any;
   @Input() avg: any;
+  @Input() rating: boolean;
   constructor() { }
 
   ngOnInit() {
-    this.cake = {baker: "", imgUrl: "", reviews: []}
   }
 }

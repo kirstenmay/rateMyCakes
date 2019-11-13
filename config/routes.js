@@ -6,4 +6,5 @@ module.exports = app => {
     app.post('/api/cakes/new', controller.newCake);
     app.put('/api/cakes/:id/review', controller.newReview);
     app.delete('/api/cakes/:id/delete', controller.removeCake);
+    app.get('/api/cakes/:name', controller.findBaker);
 }
