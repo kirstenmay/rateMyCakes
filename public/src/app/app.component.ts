@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
       console.log("did we find anything", data.result)
       if(data.message === "success"){
         console.log("Trying to find baker by name", data.result);
+        this.allCakes = data.result;
       }
     })
   }
@@ -64,6 +65,7 @@ export class AppComponent implements OnInit {
     let observable = this._httpService.newCake(this.newCake);
     observable.subscribe((data: any) => {
       if(data.message === "We have an error"){
+        this.revError = false;
         this.error = "Invalid form submission. Baker and Url fields are required";
         this.newError = true;
       }

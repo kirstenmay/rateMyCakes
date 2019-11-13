@@ -38,7 +38,8 @@ module.exports = {
             .catch(err => res.json({ message: "We have an error", result: err }))
     },
     findBaker: function(req, res) {
-        Cake.find({ baker: req.params.baker })
+        console.log(req.params.name);
+        Cake.find({ baker: req.params.name })
             .then(data => res.json({ message: "success", result: data }))
             .catch(err => res.json({ message: "We have an error", result: err }))
     }

@@ -23,6 +23,6 @@ export class HttpService {
     return this._http.delete(`/api/cakes/${id}/delete`);
   }
   findByName(baker){
-    return this._http.get(`/api/cakes/${baker}`);
+    return this._http.get(`/api/baker/${baker}`);
   }
 }
