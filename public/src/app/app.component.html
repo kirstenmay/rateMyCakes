@@ -13,6 +13,66 @@
     <div class="container">
         <div class="text-center">
             <h1>Rate My Cakes</h1>
+            <div class="row">
+                <div class="col-4" id="margin">
+                    <div class="card" id="blue">
+                        <div class="card-body">
+                            <h2>Add a new Cake</h2>
+                            <!-- <p> {{ newCake | json }} </p> -->
+                            <form (submit)="makeNewCake()">
+                                <div class="form-group">
+                                    <label for="baker">Baker name:</label>
+                                    <input [(ngModel)]="newCake.baker" name="baker" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imgUrl">Image Url:</label>
+                                    <input [(ngModel)]="newCake.imgUrl" name="imgUrl" type="text" class="form-control">
+                                </div>
+                                <div class="float-right">
+                                    <input type="submit" class="btn btn-sm btn-outline-dark">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="card" id="flex">
+                        <div class="card-body" id="scrollable">
+                            <div *ngFor="let cake of allCakes" class="row" id="border">
+                                <div class="col-5">
+                                    <a (click)="showDetails(cake._id)">
+                                        <img src="{{cake.imgUrl}}" alt="Cake">
+                                    </a>
+                                    <small>Click image for cake details!</small>
+                                </div>
+                                <div class="col-7">
+                                    <h2>Review {{cake.baker}}'s cake</h2>
+                                    <form (submit)="addCakeReview(cake._id)">
+                                        <div class="form-group">
+                                            <label for="rating">Rating (stars):</label>
+                                            <select [(ngModel)]="newReview.rating" name="rating" class="form-control">
+                                              <option value="" disabled selected>Select...</option>
+                                              <option value="1">1</option>
+                                              <option value="2">2</option>
+                                              <option value="3">3</option>
+                                              <option value="4">4</option>
+                                              <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="comment">Comment:</label>
+                                            <textarea [(ngModel)]="newReview.comment" name="comment" rows="3" class="form-control"></textarea>
+                                        </div>
+                                        <div class="float-right">
+                                            <input type="submit" class="btn btn-sm btn-outline-dark" value="Review">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
@@ -20,3 +80,5 @@
 </html>
 
 <router-outlet></router-outlet>
+
+<!-- <img src="../assets/static/img/cake3.jpg" alt=""> -->

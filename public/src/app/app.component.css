@@ -9,3 +9,36 @@ h1 {
 h2 {
     font-weight: 80;
 }
+
+img {
+    height: 18vw;
+    width: 13vw;
+}
+
+#flex {
+    flex: 1 1 auto;
+}
+
+#scrollable {
+    overflow: auto;
+    box-sizing: border-box;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 24vw;
+}
+
+#border {
+    padding: 2vw 2vw;
+    border-bottom: 1px solid lightgray;
+}
+
+#margin {
+    margin-top: 1vw;
+}
+
+#blue {
+    padding: 2vw 1vw;
+    background-color: rgba(23, 105, 172, 0.158);
+}

@@ -23,7 +23,7 @@ module.exports = {
     },
     newReview: function(req, res) {
         let review = req.body;
-        Review.Create(review)
+        Review.create(review)
             .then(data => {
                 Cake.updateOne({ _id: req.params.id }, { $addToSet: { reviews: data } })
                     .then(data => res.json({ message: "success", result: data }))
