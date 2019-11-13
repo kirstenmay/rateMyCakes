@@ -7,19 +7,23 @@ import {HttpService} from './http.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  avgRating: any;
   title = 'public';
   allCakes: any;
   newCake: any;
   newReview: any;
   oneCake: any;
+  display: boolean;
 
   constructor(private _httpService: HttpService) {}
   ngOnInit(){
     this.getAllCakesFromService();
+    this.avgRating = 0;
     this.allCakes = [];
     this.newCake = {baker: "", imgUrl: ""};
     this.newReview = {rating: "", comment: ""};
     this.oneCake = {baker: "", imgUrl: ""};
+    this.display = false;
   }
 
   getAllCakesFromService(){
@@ -56,8 +60,19 @@ export class AppComponent implements OnInit {
       if(data.message === "success"){
         console.log("Got one cake", data.result)
         this.oneCake = data.result;
+        this.getAvgRating(this.oneCake.reviews);
       }
     })
+  }
+  getAvgRating(reviews){
+    var sum = 0;
+    var count = 0;
+    for(var rate of reviews){
+      sum += rate.rating;
+      count ++;
+    }
+    this.avgRating = sum/count;
+    this.display = true;
   }
 }
 

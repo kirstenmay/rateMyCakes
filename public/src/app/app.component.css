@@ -42,3 +42,10 @@ img {
     padding: 2vw 1vw;
     background-color: rgba(23, 105, 172, 0.158);
 }
+
+#bottom {
+    margin: 4vw 0;
+    border: 1px solid rgba(255, 147, 139, 0.308);
+    border-radius: 5px;
+    padding: 2vw;
+}

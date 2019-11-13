@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-4">
+        <img src="{{cake.imgUrl}}" alt="Cake">
+    </div>
+    <div class="col-8">
+        <h2>{{cake.baker}}'s delicious creation</h2>
+        <div class="text-center">
+            <small>Average Rating: {{avg}} stars</small>
+            <ul class="list-group list-group-flush">
+                <li *ngFor="let review of cake.reviews" class="list-group-item">{{review.rating}} stars <br> {{review.comment}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

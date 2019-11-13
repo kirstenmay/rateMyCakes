@@ -73,6 +73,11 @@
                     </div>
                 </div>
             </div>
+            <div class="row justify-content-center">
+                <div *ngIf="display" class="col-10 offset-1" id="bottom">
+                    <app-cake [cake]="oneCake" [avg]="avgRating"></app-cake>
+                </div>
+            </div>
         </div>
     </div>
 </body>
